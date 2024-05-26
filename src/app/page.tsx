@@ -1,6 +1,15 @@
 import Image from "next/image";
-
+import {A_start} from './utils/A*'
 export default function Home() {
+  var Matrix = [
+    [0,1,0],
+    [0,0,0],
+    [0,0,0],
+];
+const start={i:0,j:0}
+const goal={i:2,j:2}
+const A=A_start(Matrix,start,goal);
+  console.log(A.noads,A.childs)
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
