@@ -1,23 +1,16 @@
+import { Coordinate,Walls } from "../types/mazeTypes";
+
 export const A_start = (
   Matrix: number[][],
   Start: {
     i: number;
     j: number;
   },
-  Goal : {
-    i: number;
-    j: number;
-}
+  Goal : Coordinate
 ) => {
- var openFile: {
-    i: number;
-    j: number;
-}[] =[]
+ var openFile: Coordinate[] =[]
 var Closed = [];
-var noads: {
-    i: number;
-    j: number;
-}[] = [];
+var noads: Coordinate[] = [];
 var childs = [[]];
 var Indexchilds = 0;
  openFile.push(Start);
@@ -62,11 +55,11 @@ var Indexchilds = 0;
     childs: childs,
   };
 };
-const ManhattanDistance = (index:{i:number,j:number}, Goal:{i:number,j:number}) => {
+const ManhattanDistance = (index:Coordinate, Goal:Coordinate) => {
   return Math.abs(index.i - Goal.i) + Math.abs(index.j - Goal.j);
 };
 
-const MinDistance = (Goal:{i:number;j:number}, openFile:{i:number;j:number}[]) => {
+const MinDistance = (Goal:Coordinate, openFile:Coordinate[]) => {
   var min = openFile[0];
   for (let i = 1; i < openFile.length; i++) {
     if (ManhattanDistance(openFile[i], Goal) < ManhattanDistance(min, Goal))
@@ -75,7 +68,7 @@ const MinDistance = (Goal:{i:number;j:number}, openFile:{i:number;j:number}[]) =
   return min;
 };
 
-const Children = (noad:{i:number;j:number}, Matrix:number[][]) => {
+const Children = (noad:Coordinate, Matrix:number[][]) => {
    var possiblePath = [];
   const i = noad.i;
   const j = noad.j;
