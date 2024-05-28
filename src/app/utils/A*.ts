@@ -1,7 +1,7 @@
 import { Coordinate,Walls } from "../types/mazeTypes";
 
 export const A_start = (
-  Matrix: number[][],
+  Matrix: Walls[][],
   Start: {
     i: number;
     j: number;
@@ -28,6 +28,7 @@ var Indexchilds = 0;
     //   console.log(noads);
     //   console.log("Index : " + Indexchilds);
     //   console.log(childs);
+    Closed.push(noad)
       break;
     }
     if (Closed.findIndex((item) => item.i === noad.i && item.j === noad.j) == -1) {
@@ -53,6 +54,7 @@ var Indexchilds = 0;
   return {
     noads: noads,
     childs: childs,
+    visited:Closed
   };
 };
 const ManhattanDistance = (index:Coordinate, Goal:Coordinate) => {
@@ -68,22 +70,18 @@ const MinDistance = (Goal:Coordinate, openFile:Coordinate[]) => {
   return min;
 };
 
-const Children = (noad:Coordinate, Matrix:number[][]) => {
+const Children = (noad:Coordinate, Matrix:Walls[][]) => {
    var possiblePath = [];
   const i = noad.i;
   const j = noad.j;
-  if (i - 1 >= 0) {
-    if (Matrix[i - 1][j] == 0) possiblePath.push({ i: i - 1, j: j });
-  }
-  if (i + 1 <= Matrix.length - 1) {
-    if (Matrix[i + 1][j] == 0) possiblePath.push({ i: i + 1, j: j });
-  }
-  if (j - 1 >= 0) {
-    if (Matrix[i][j - 1] == 0) possiblePath.push({ i: i, j: j - 1 });
-  }
-  if (j + 1 <= Matrix.length - 1) {
-    if (Matrix[i][j + 1] == 0) possiblePath.push({ i: i, j: j + 1 });
-  }
+    if (Matrix[i][j].up == 0) possiblePath.push({ i: i - 1, j: j });
+
+    if (Matrix[i][j].down == 0) possiblePath.push({ i: i + 1, j: j });
+
+    if (Matrix[i][j].left == 0) possiblePath.push({ i: i, j: j - 1 });
+
+    if (Matrix[i][j].right == 0) possiblePath.push({ i: i, j: j + 1 });
+
   return possiblePath;
 };
 
