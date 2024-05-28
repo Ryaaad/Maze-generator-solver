@@ -7,8 +7,8 @@ const goal={i:3,j:3}
 // const A=A_start(Matrix,start,goal);
   // console.log(A.noads,A.childs)
 
-const columnCount=3
-const rowCount=3
+const columnCount=6
+const rowCount=6
 const Maze=RandomMaze(columnCount,rowCount,start)
 
   return (
