@@ -3,9 +3,9 @@ import { Coordinate, Walls } from "../types/mazeTypes";
 export const RandomMaze = (
   columns: number,
   rows: number,
-  Start: Coordinate
 ) => {
   var Maze = initMaze(columns, rows);
+  const Start={i:0,j:0}
   var visited: Coordinate[] = [];
   var Stack: Coordinate[] = [];
   var notVisited: Coordinate[] = [];
@@ -51,7 +51,7 @@ export const RandomMaze = (
       break;
     }
   }
-  console.log(Maze)
+//   console.log(Maze)
   return Maze;
 };
 
@@ -84,7 +84,7 @@ const CellVisited = (i: number, j: number, visited: Coordinate[]): boolean => {
   return visited.some(item => item.i === i && item.j === j);
 };
 
-function RandomInt(min: number, max: number): number {
+export function RandomInt(min: number, max: number): number {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
