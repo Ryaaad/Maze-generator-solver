@@ -2,10 +2,4 @@
 @tailwind components;
 @tailwind utilities;
 
-/* .slider::-webkit-slider-thumb {
-    @apply w-6 h-6 bg-green-500 rounded-full cursor-pointer;
-  }
-  .slider::-moz-range-thumb {
-    @apply w-6 h-6 bg-green-500 rounded-full cursor-pointer;
-  }
-   */
+  
