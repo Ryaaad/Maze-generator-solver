@@ -148,15 +148,13 @@ export default function Home() {
           className="w-60 h-14 rounded-md flex items-center justify-center text-white bg-black font-semibold text-sm "
           onClick={() => updateSize()}
         >
-          {" "}
-          Generate a maze with the defined Size{" "}
+          Generate a random maze with the defined Size
         </button>
         <button
           className="w-60 h-14 rounded-md flex items-center justify-center text-white bg-black font-semibold text-sm "
           onClick={() => RandomSize()}
         >
-          {" "}
-          Generate a maze with a random size{" "}
+          Generate a random maze 
         </button>
       </div>
     </div>
