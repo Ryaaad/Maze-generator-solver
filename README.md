@@ -12,5 +12,3 @@
 * Possibility to download the generated Maze
 * Generate Solution for the Maze using A* Algorithme
 * Mini Game Maze 
-
-## How To Use
