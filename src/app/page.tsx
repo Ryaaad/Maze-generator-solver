@@ -2,11 +2,28 @@
 import { useEffect, useState } from "react";
 import { A_start } from "./utils/A*";
 import { RandomMaze, RandomInt } from "./utils/RandoMaze";
+import React, { useRef } from 'react';
+import * as htmlToImage from 'html-to-image';
 import { Coordinate, Walls } from "./types/mazeTypes";
 export default function Home() {
   const [Size, setSize] = useState<number>(10);
   const [MazeSize, setMazeSize] = useState<number>(10);
 
+  const componentRef = useRef();
+  const handleCaptureClick = () => {
+    if (componentRef.current) {
+      htmlToImage?.toPng(componentRef.current)
+        .then((dataUrl) => {
+          const link = document.createElement('a');
+          link.href = dataUrl;
+          link.download = 'component-image.png';
+          link.click();
+        })
+        .catch((error) => {
+          console.error('Error capturing the image:', error);
+        });
+    }
+  };
   const handleSizeChange = (event) => {
     setSize(event.target.value);
   };
@@ -71,7 +88,7 @@ export default function Home() {
 
   return (
     <div className="flex justify-around items-center min-h-screen min-w-screen">
-      <div className="grid h-32 items-center ">
+      <div className="grid h-52 items-center ">
         <button
           className="w-60 h-14 rounded-md flex items-center justify-center text-white bg-black font-semibold text-sm "
           onClick={() => setAction('MiniGame')}
@@ -84,6 +101,12 @@ export default function Home() {
         >
           Generate Solution
         </button>
+        <button
+          className="w-60 h-14 rounded-md flex items-center justify-center text-white bg-black font-semibold text-sm "
+          onClick={handleCaptureClick}
+        >
+          Download the Maze
+        </button>
       </div>
       <div
         style={{
@@ -94,7 +117,8 @@ export default function Home() {
         }}
         className={` w-[560px] h-[560px] ${
           !MazeSize || !Maze ? "flex justify-center items-center " : "grid"
-        } grid m-5 border-solid border-4 border-black `}
+        } border-solid border-4 border-black `}
+        ref={componentRef}
       >
         {MazeSize &&
           Maze &&
@@ -130,8 +154,8 @@ export default function Home() {
           ))}
       </div>
 
-      <div className="grid  h-56 items-center ">
-        <div className="w-60">
+      <div className="grid h-56 items-center w-64 ">
+        <div className="w-full">
           <input
             type="range"
             min="10"
@@ -145,13 +169,13 @@ export default function Home() {
           </div>
         </div>
         <button
-          className="w-60 h-14 rounded-md flex items-center justify-center text-white bg-black font-semibold text-sm "
+          className="w-full h-14 rounded-md flex items-center justify-center text-white bg-black font-semibold text-sm "
           onClick={() => updateSize()}
         >
           Generate a random maze with the defined Size
         </button>
         <button
-          className="w-60 h-14 rounded-md flex items-center justify-center text-white bg-black font-semibold text-sm "
+          className="w-full h-14 rounded-md flex items-center justify-center text-white bg-black font-semibold text-sm "
           onClick={() => RandomSize()}
         >
           Generate a random maze 
